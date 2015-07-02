@@ -305,6 +305,9 @@
                 keyup: $.proxy(function(e){
                     if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
                         this.update();
+                    if (e.keyCode == 91) {
+                        this.o.multidate = false;
+                    }
                 }, this),
                 keydown: $.proxy(this.keydown, this),
                 paste: $.proxy(this.paste, this)
@@ -377,7 +380,7 @@
 							this.element.find(e.target).length ||
 							this.picker.is(e.target) ||
 							this.picker.find(e.target).length
-						)){
+						) && !this.picker.hasClass('datepicker-inline')){
 							$(this.picker).hide();
 						}
 					}, this)
@@ -1234,6 +1237,11 @@
 		},
 
 		keydown: function(e){
+            if (e.keyCode == 91) {
+                this.o.multidate = true;
+            } else {
+                this.o.multidate = true;
+            }
 			if (!this.picker.is(':visible')){
 				if (e.keyCode === 40 || e.keyCode === 27) // allow down to re-show picker
 					this.show();
