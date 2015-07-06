@@ -351,6 +351,9 @@
                 keyup: $.proxy(function(e){
                     if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
                         this.update();
+                    if (e.keyCode == 91) {
+                        this.o.multidate = false;
+                    }
                 }, this),
                 keydown: $.proxy(this.keydown, this),
                 paste: $.proxy(this.paste, this)
@@ -422,11 +425,9 @@
 							this.element.is(e.target) ||
 							this.element.find(e.target).length ||
 							this.picker.is(e.target) ||
-							this.picker.find(e.target).length ||
-							this.picker.hasClass('datepicker-inline')
-						)){
-							$(this.picker).hide();
-							this._trigger('hide');
+							this.picker.find(e.target).length
+						) && !this.picker.hasClass('datepicker-inline')){
+							//$(this.picker).hide();
 						}
 					}, this)
 				}]
@@ -688,8 +689,11 @@
 			var offset = this.component ? this.component.parent().offset() : this.element.offset();
 			var height = this.component ? this.component.outerHeight(true) : this.element.outerHeight(false);
 			var width = this.component ? this.component.outerWidth(true) : this.element.outerWidth(false);
-			var left = offset.left - appendOffset.left,
-				top = offset.top - appendOffset.top;
+            /*
+            var left = offset.left - appendOffset.left,
+				top = offset.top - appendOffset.top;*/
+            var left = offset.left - appendOffset.left - 10,
+                top = offset.top - appendOffset.top + 350;
 
 			this.picker.removeClass(
 				'datepicker-orient-top datepicker-orient-bottom '+
@@ -1200,6 +1204,7 @@
 								}
 							}
 							this._setDate(UTCDate(year, month, day));
+                            this.handleDateClick();
 						}
 						break;
 				}
@@ -1258,6 +1263,12 @@
 				this.hide();
 			}
 		},
+
+        handleDateClick: function () {
+            if (this.o.onDayClick !== '') {
+                this.o.onDayClick();
+            }
+        },
 
 		moveMonth: function(date, dir){
 			if (!date)
@@ -1318,6 +1329,11 @@
 		},
 
 		keydown: function(e){
+            if (e.keyCode == 91) {
+                this.o.multidate = true;
+            } else {
+                this.o.multidate = true;
+            }
 			if (!this.picker.is(':visible')){
 				if (e.keyCode === 40 || e.keyCode === 27) // allow down to re-show picker
 					this.show();
@@ -1635,7 +1651,7 @@
 		enableOnReadonly: true,
 		container: 'body',
 		immediateUpdates: false,
-		title: ''
+        onDayClick: ''
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
 		'format',
