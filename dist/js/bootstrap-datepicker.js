@@ -1122,6 +1122,7 @@
 								}
 							}
 							this._setDate(UTCDate(year, month, day));
+                            this.handleDateClick();
 						}
 						break;
 				}
@@ -1180,6 +1181,12 @@
 				this.hide();
 			}
 		},
+
+        handleDateClick: function () {
+            if (this.o.onDayClick !== '') {
+                this.o.onDayClick();
+            }
+        },
 
 		moveMonth: function(date, dir){
 			if (!date)
@@ -1558,7 +1565,8 @@
 		disableTouchKeyboard: false,
 		enableOnReadonly: true,
 		container: 'body',
-		immediateUpdates: false
+		immediateUpdates: false,
+        onDayClick: ''
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
 		'format',
