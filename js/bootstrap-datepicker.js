@@ -157,7 +157,7 @@
 
 	Datepicker.prototype = {
 		constructor: Datepicker,
-
+        allowMultidate: false,
 		_process_options: function(opts){
 			// Store raw options for reference
 			this._o = $.extend({}, this._o, opts);
@@ -1111,6 +1111,9 @@
 		click: function(e){
 			e.preventDefault();
 			e.stopPropagation();
+            if(!this.allowMultidate) {
+                this.o.multidate = false;
+            }
 			var target = $(e.target).closest('span, td, th'),
 				year, month, day;
 			if (target.length === 1){
@@ -1329,11 +1332,6 @@
 		},
 
 		keydown: function(e){
-            if (e.keyCode == 91) {
-                this.o.multidate = true;
-            } else {
-                this.o.multidate = true;
-            }
 			if (!this.picker.is(':visible')){
 				if (e.keyCode === 40 || e.keyCode === 27) // allow down to re-show picker
 					this.show();
@@ -1343,6 +1341,10 @@
 				dir, newDate, newViewDate,
 				focusDate = this.focusDate || this.viewDate;
 			switch (e.keyCode){
+                case 91:
+                    this.allowMultidate = true;
+                    this.o.multidate = true;
+                    break;
 				case 27: // escape
 					if (this.focusDate){
 						this.focusDate = null;
