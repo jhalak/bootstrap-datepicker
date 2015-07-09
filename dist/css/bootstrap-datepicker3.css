@@ -749,3 +749,11 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
   margin-left: -5px;
   margin-right: -5px;
 }
+.dow {
+    cursor: pointer;
+}
+.dow-selected {
+    border-width: 0 2px 0 2px;
+    border-color: #35B7FF;
+    border-style: solid;
+}

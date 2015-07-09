@@ -153,6 +153,9 @@
 		if (this.isInline){
 			this.show();
 		}
+        /*if (this.o.clickableWeekday) {
+            $('.dow').css('cursor', 'pointer');
+        }*/
 	};
 
 	Datepicker.prototype = {
@@ -600,6 +603,12 @@
 			this.setValue();
 			return this;
 		},
+        setDow: function(dow) {
+            if (this.o.onDowClick !== '') {
+                console.log('dow: ' + dow);
+                this.o.onDowClick(dow);
+            }
+        },
 
 		setUTCDates: function(){
 			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
@@ -824,8 +833,9 @@
 
 		fillDow: function(){
 			var dowCnt = this.o.weekStart,
-				html = '<tr>';
-			if (this.o.calendarWeeks){
+				html = '<tr>',
+                selectedDow = this.o.dowInputEl.val();
+            if (this.o.calendarWeeks){
 				this.picker.find('.datepicker-days .datepicker-switch')
 					.attr('colspan', function(i, val){
 						return parseInt(val) + 1;
@@ -833,8 +843,8 @@
 				html += '<th class="cw">&#160;</th>';
 			}
 			while (dowCnt < this.o.weekStart + 7){
-				html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
-			}
+                    html += '<th class="dow">'+dates[this.o.language].daysMin[(dowCnt++)%7]+'</th>';
+            }
 			html += '</tr>';
 			this.picker.find('.datepicker-days thead').append(html);
 		},
@@ -1120,6 +1130,9 @@
 				switch (target[0].nodeName.toLowerCase()){
 					case 'th':
 						switch (target[0].className){
+                            case 'dow':
+                                this.setDow(target[0].innerText);
+                                break;
 							case 'datepicker-switch':
 								this.showMode(1);
 								break;
@@ -1653,7 +1666,10 @@
 		enableOnReadonly: true,
 		container: 'body',
 		immediateUpdates: false,
-        onDayClick: ''
+        onDayClick: '',
+		title: '',
+        clickableWeekday: false,
+        onDowClick: ''
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
 		'format',
