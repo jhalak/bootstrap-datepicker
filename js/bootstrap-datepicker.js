@@ -692,8 +692,8 @@
             /*
             var left = offset.left - appendOffset.left,
 				top = offset.top - appendOffset.top;*/
-            var left = offset.left - appendOffset.left - 10,
-                top = offset.top - appendOffset.top + 350;
+            var left = offset.left - appendOffset.left - 6,
+                top = offset.top - appendOffset.top + 330;
 
 			this.picker.removeClass(
 				'datepicker-orient-top datepicker-orient-bottom '+
