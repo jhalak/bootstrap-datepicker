@@ -153,9 +153,6 @@
 		if (this.isInline){
 			this.show();
 		}
-        /*if (this.o.clickableWeekday) {
-            $('.dow').css('cursor', 'pointer');
-        }*/
 	};
 
 	Datepicker.prototype = {
@@ -352,7 +349,7 @@
 		_buildEvents: function(){
             var events = {
                 keyup: $.proxy(function(e){
-                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9]) === -1)
+                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9, 91]) === -1)
                         this.update();
                     if (e.keyCode == 91) {
                         this.o.multidate = false;
@@ -605,7 +602,6 @@
 		},
         setDow: function(dow) {
             if (this.o.onDowClick !== '') {
-                console.log('dow: ' + dow);
                 this.o.onDowClick(dow);
             }
         },
@@ -1131,9 +1127,10 @@
 					case 'th':
 						switch (target[0].className){
                             case 'dow':
+                            case 'dow dow-selected-header':
                                 this.setDow(target[0].innerText);
                                 break;
-							case 'datepicker-switch':
+                            case 'datepicker-switch':
 								this.showMode(1);
 								break;
 							case 'prev':
