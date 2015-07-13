@@ -349,7 +349,7 @@
 		_buildEvents: function(){
             var events = {
                 keyup: $.proxy(function(e){
-                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9, 91]) === -1)
+                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9, 91, 224]) === -1)
                         this.update();
                     if (e.keyCode == 91) {
                         this.o.multidate = false;
@@ -1217,7 +1217,7 @@
 								}
 							}
 							this._setDate(UTCDate(year, month, day));
-                            this.handleDateClick();
+                            this.handleDateClick(UTCDate(year, month, day));
 						}
 						break;
 				}
@@ -1277,9 +1277,9 @@
 			}
 		},
 
-        handleDateClick: function () {
+        handleDateClick: function (date) {
             if (this.o.onDayClick !== '') {
-                this.o.onDayClick();
+                this.o.onDayClick(date);
             }
         },
 
@@ -1347,11 +1347,13 @@
 					this.show();
 				return;
 			}
+            console.log(e.keyCode);
 			var dateChanged = false,
 				dir, newDate, newViewDate,
 				focusDate = this.focusDate || this.viewDate;
 			switch (e.keyCode){
                 case 91:
+                case 224: // Firefox
                     this.allowMultidate = true;
                     this.o.multidate = true;
                     break;
