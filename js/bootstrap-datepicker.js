@@ -349,7 +349,7 @@
 		_buildEvents: function(){
             var events = {
                 keyup: $.proxy(function(e){
-                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9, 91, 224]) === -1)
+                    if ($.inArray(e.keyCode, [27, 37, 39, 38, 40, 32, 13, 9, 91, 93, 224]) === -1)
                         this.update();
                     if (e.keyCode == 91) {
                         this.o.multidate = false;
@@ -1353,6 +1353,7 @@
 				focusDate = this.focusDate || this.viewDate;
 			switch (e.keyCode){
                 case 91:
+                case 93:
                 case 224: // Firefox
                     this.allowMultidate = true;
                     this.o.multidate = true;
