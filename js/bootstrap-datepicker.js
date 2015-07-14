@@ -1347,7 +1347,7 @@
 					this.show();
 				return;
 			}
-            console.log(e.keyCode);
+
 			var dateChanged = false,
 				dir, newDate, newViewDate,
 				focusDate = this.focusDate || this.viewDate;
