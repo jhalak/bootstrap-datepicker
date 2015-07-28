@@ -1143,6 +1143,7 @@
 									case 0:
 										this.viewDate = this.moveMonth(this.viewDate, dir);
 										this._trigger('changeMonth', this.viewDate);
+                                        this.handleChangeMonth(this.viewDate);
 										break;
 									case 1:
 									case 2:
@@ -1283,6 +1284,12 @@
         handleDateClick: function (date) {
             if (this.o.onDayClick !== '') {
                 this.o.onDayClick(this);
+            }
+        },
+
+        handleChangeMonth: function (date) {
+            if (this.o.onMonthChange !== '') {
+                this.o.onMonthChange(this);
             }
         },
 
@@ -1672,7 +1679,8 @@
         onDayClick: '',
 		title: '',
         clickableWeekday: false,
-        onDowClick: ''
+        onDowClick: '',
+        onMonthChange: ''
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
 		'format',
