@@ -1279,7 +1279,7 @@
 
         handleDateClick: function (date) {
             if (this.o.onDayClick !== '') {
-                this.o.onDayClick(date);
+                this.o.onDayClick(this);
             }
         },
 
