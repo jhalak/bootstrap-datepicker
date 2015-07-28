@@ -966,6 +966,9 @@
 					}
 				}
 				clsName = this.getClassNames(prevMonth);
+				var monthName = month + 1;
+				monthName = monthName < 10 ? '0' + monthName : '' + monthName;
+				clsName.push('month-' + monthName);
 				clsName.push('day');
 
 				if (this.o.beforeShowDay !== $.noop){
