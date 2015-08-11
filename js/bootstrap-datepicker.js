@@ -1131,7 +1131,7 @@
 						switch (target[0].className){
                             case 'dow':
                             case 'dow dow-selected-header':
-                                this.setDow(target[0].innerText);
+                                this.setDow(target[0].innerHTML);
                                 break;
                             case 'datepicker-switch':
 								this.showMode(1);
