@@ -710,6 +710,7 @@
 				if (this.o.orientation.x === 'right')
 					left -= calendarWidth - width;
 			}
+
 			// auto x orientation is best-placement: if it crosses a window
 			// edge, fudge it sideways
 			else {
@@ -744,6 +745,8 @@
 				top -= calendarHeight + parseInt(this.picker.css('padding-top'));
 			else
 				top += height;
+
+            top = 6;
 
 			if (this.o.rtl) {
 				var right = windowWidth - (left + width);
