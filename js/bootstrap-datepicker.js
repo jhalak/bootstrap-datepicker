@@ -1179,6 +1179,7 @@
 								year = this.viewDate.getUTCFullYear();
 								this.viewDate.setUTCMonth(month);
 								this._trigger('changeMonth', this.viewDate);
+                                this.handleChangeMonth(this.viewDate);
 								if (this.o.minViewMode === 1){
 									this._setDate(UTCDate(year, month, day));
 									this.showMode();
