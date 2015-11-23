@@ -605,6 +605,11 @@
                 this.o.onDowClick(dow);
             }
         },
+        setCw: function(cw) {
+            if (this.o.onCwClick !== '') {
+                this.o.onCwClick(this, cw);
+            }
+        },
 
 		setUTCDates: function(){
 			var args = $.isArray(arguments[0]) ? arguments[0] : arguments;
@@ -1202,6 +1207,10 @@
 						}
 						break;
 					case 'td':
+                        if (target.hasClass('cw')){
+                            this.setCw(target[0].innerHTML);
+
+                        }
 						if (target.hasClass('day') && !target.hasClass('disabled')){
 							day = parseInt(target.text(), 10)||1;
 							year = this.viewDate.getUTCFullYear();
@@ -1684,6 +1693,7 @@
 		title: '',
         clickableWeekday: false,
         onDowClick: '',
+        onCwClick: '',
         onMonthChange: ''
 	};
 	var locale_opts = $.fn.datepicker.locale_opts = [
