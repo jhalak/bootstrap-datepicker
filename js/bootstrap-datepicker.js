@@ -480,6 +480,9 @@
 			this.picker.show();
 			this._attachSecondaryEvents();
 			this._trigger('show');
+            if (this.o.onInit !== '') {
+                this.o.onInit(this);
+            }
 			if ((window.navigator.msMaxTouchPoints || 'ontouchstart' in document) && this.o.disableTouchKeyboard) {
 				$(this.element).blur();
 			}
@@ -602,7 +605,7 @@
 		},
         setDow: function(dow) {
             if (this.o.onDowClick !== '') {
-                this.o.onDowClick(dow);
+                this.o.onDowClick(this, dow);
             }
         },
         setCw: function(cw) {
@@ -1296,7 +1299,7 @@
 
         handleDateClick: function (date) {
             if (this.o.onDayClick !== '') {
-                this.o.onDayClick(this);
+                this.o.onDayClick(this, date);
             }
         },
 
@@ -1692,6 +1695,7 @@
         onDayClick: '',
 		title: '',
         clickableWeekday: false,
+        onInit: '',
         onDowClick: '',
         onCwClick: '',
         onMonthChange: ''
